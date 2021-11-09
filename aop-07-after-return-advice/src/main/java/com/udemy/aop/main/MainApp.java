@@ -24,6 +24,11 @@ public class MainApp {
 			System.out.println("account holder name : " + account.getName() + " and level is " + account.getLevel());
 		}
 
+		
+		System.out.println();
+		
+		accountDAO.getAccounts();
+		
 		context.close();
 
 	}

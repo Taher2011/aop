@@ -24,7 +24,6 @@ public class LoggingAspect {
 	 * proceedingJoinPoint to execute target method
 	 */
 
-
 	@Before("execution(* *Accounts(..))")
 	public void beforeAdviceOnAnyMethodOfAnyRetrunTypeEndsWithAccounts(JoinPoint joinPoint) {
 		String method = joinPoint.getSignature().toShortString();
@@ -65,6 +64,8 @@ public class LoggingAspect {
 		try {
 			object = proceedingJoinPoint.proceed();
 		} catch (Exception e) {
+			// we can also re-throw exception object
+			// throw e;
 			object = new ArrayList<>();
 		}
 

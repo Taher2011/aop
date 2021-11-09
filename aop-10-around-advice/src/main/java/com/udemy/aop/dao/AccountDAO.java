@@ -23,6 +23,9 @@ public class AccountDAO {
 		System.out.println("completed adding accounts");
 		List<Account> accounts = new ArrayList<>();
 		accounts.add(account);
+		if (false) {
+			throw new RuntimeException();
+		}
 		return accounts;
 	}
 

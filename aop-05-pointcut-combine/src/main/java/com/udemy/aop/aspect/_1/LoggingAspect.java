@@ -10,28 +10,28 @@ import org.springframework.stereotype.Component;
 public class LoggingAspect {
 
 	@Pointcut("execution(* com.udemy.aop.dao.*.*(..))")
-	public void beforeAdviceOnDaoMethod() {
+	public void anyMethodOfDaoPackage() {
 	}
 
 	@Pointcut("execution(* com.udemy.aop.dao.*.set*(..))")
-	public void setter() {
+	public void anyMethodStartWithSetOfDaoPackage() {
 	}
 
 	@Pointcut("execution(* com.udemy.aop.dao.*.get*(..))")
-	public void getter() {
+	public void anyMethodStartWithGetOfDaoPackage() {
 	}
 
-	@Pointcut("beforeAdviceOnDaoMethod() && !(getter() || setter())")
-	public void forDaoMethodNoGetterSetter() {
+	@Pointcut("anyMethodOfDaoPackage() && !(anyMethodStartWithGetOfDaoPackage() || anyMethodStartWithSetOfDaoPackage())")
+	public void anyMethodExcludingSetterGetterOfDaoPackage() {
 	}
 
-	@Before("beforeAdviceOnDaoMethod()")
-	public void beforeAdviceOnDaoMethods() {
+	@Before("anyMethodOfDaoPackage()")
+	public void beforeAdviceOnAnyMethodOfDaoPackage() {
 		System.out.println("applying before advice on dao methods");
 	}
-	
-	@Before("forDaoMethodNoGetterSetter()")
-	public void beforeAdviceOnDaoMethodsNoGetterSetter() {
+
+	@Before("anyMethodExcludingSetterGetterOfDaoPackage()")
+	public void beforeAdviceOnAnyMethodExcludingSetterGetterOfDaoPackage() {
 		System.out.println("applying before advice on dao methods but not on getter/setter");
 	}
 }

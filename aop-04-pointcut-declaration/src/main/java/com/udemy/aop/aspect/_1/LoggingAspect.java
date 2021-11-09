@@ -10,23 +10,26 @@ import org.springframework.stereotype.Component;
 public class LoggingAspect {
 
 	@Pointcut("execution(* addAccount())")
-	public void forAddAccount() {
-
+	public void anyReturnTypeWithMethodNameAddAccountWithNoParam() {
 	}
 
-	@Before("forAddAccount()")
-	public void loggingBeforeAddAccount() {
-		System.out.println("applying @Before advice for logging on addAccount()");
+	@Pointcut("execution(* addUser())")
+	public void anyReturnTypeWithMethodNameAddUserWithNoParam() {
 	}
 
-	@Before("forAddAccount()")
-	public void securityBeforeAddAccount() {
-		System.out.println("applying @Before advice for security on addAccount()");
+	@Before("anyReturnTypeWithMethodNameAddAccountWithNoParam() || anyReturnTypeWithMethodNameAddUserWithNoParam()")
+	public void loggingBefore() {
+		System.out.println("applying @Before advice for logging");
 	}
 
-	@Before("forAddAccount()")
-	public void trxBeforeAddAccount() {
-		System.out.println("applying @Before advice for trx on addAccount()");
+	@Before("anyReturnTypeWithMethodNameAddAccountWithNoParam()")
+	public void securityBefore() {
+		System.out.println("applying @Before advice for security");
+	}
+
+	@Before("anyReturnTypeWithMethodNameAddAccountWithNoParam()")
+	public void trxBefore() {
+		System.out.println("applying @Before advice for trx");
 	}
 
 }
